@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_splash">
+
+    <fragment
+        android:id="@+id/fragment_splash"
+        android:name="com.example.skiftech.presentation.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splash_fragment_to_users_fragment"
+            app:destination="@id/fragment_users" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_users"
+        android:name="com.example.skiftech.presentation.users.UsersFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_users_fragment_to_user_info_fragment"
+            app:destination="@id/fragment_user_info">
+
+            <argument
+                android:name="user"
+                app:argType="com.example.skiftech.domain.models.User"
+                app:nullable="false"/>
+
+        </action>
+        <action
+            android:id="@+id/action_users_fragment_to_history_fragment"
+            app:destination="@id/fragment_history" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_user_info"
+        android:name="com.example.skiftech.presentation.userinfo.UserInfoFragment"
+        tools:layout="@layout/fragment_splash" />
+
+    <fragment
+        android:id="@+id/fragment_history"
+        android:name="com.example.skiftech.presentation.history.HistoryFragment"
+        tools:layout="@layout/fragment_splash" />
+
+</navigation>
