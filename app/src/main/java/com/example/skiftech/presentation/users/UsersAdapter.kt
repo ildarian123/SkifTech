@@ -23,10 +23,7 @@ class UsersAdapter(
         with(holder) {
             with(userList[position]) {
                 Picasso.get().load(this.picture?.medium).into(binding.ivUserAvatar)
-                binding.tvEmail.text = this.email.toString()
-                binding.tvGender.text = this.gender.toString()
                 binding.tvFirstName.text = this.name?.first.toString()
-                binding.tvLastName.text = this.name?.last.toString()
 
                 binding.clUserContainer.setOnClickListener {
                     clickListener.onClick(this)
