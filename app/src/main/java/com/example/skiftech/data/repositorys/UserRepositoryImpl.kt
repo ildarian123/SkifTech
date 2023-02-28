@@ -6,9 +6,8 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val networkApi: NetworkApi): UserRepository {
 
-    override suspend fun getUsers(): UserResponse {
-        val result = networkApi.getUsers(10)
+    override suspend fun getUsers(count: Int): UserResponse {
+        val result = networkApi.getUsers(count)
         return result.body()?: UserResponse()
     }
-
 }

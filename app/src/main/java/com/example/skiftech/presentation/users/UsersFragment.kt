@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -28,7 +29,16 @@ class UsersFragment : Fragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
-        getData()
+        setFragmentListeners()
+    }
+
+    private fun setFragmentListeners() {
+        binding.buttonLoad.setOnClickListener {
+            getData(binding.etCount.text.toString().toInt())
+        }
+        binding.buttonHistory.setOnClickListener {
+            navController.navigate(R.id.action_users_fragment_to_history_fragment)
+        }
     }
 
     override fun onCreateView(
@@ -45,9 +55,9 @@ class UsersFragment : Fragment(), ClickListener {
             if (it == null) {
                 Toast.makeText(requireContext(), "server error", Toast.LENGTH_LONG).show()
             }else{
+                vm.saveUsers(it.results?: listOf())
                 updateUserList(it)
             }
-
         }
     }
 
@@ -59,15 +69,16 @@ class UsersFragment : Fragment(), ClickListener {
         binding.rvUsers.adapter = mAdapter
     }
 
-    private fun getData() {
-        getUsers()
+    private fun getData(count: Int) {
+        getUsers(count)
     }
 
-    private fun getUsers() {
-        vm.getUsers()
+    private fun getUsers(count: Int) {
+        vm.getUsers(count)
     }
 
     override fun onClick(user: User) {
-        navController.navigate(R.id.action_users_fragment_to_user_info_fragment)
+        val bundle = bundleOf(Pair("user", user))
+        navController.navigate(R.id.action_users_fragment_to_user_info_fragment, bundle)
     }
 }

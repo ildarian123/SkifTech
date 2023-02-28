@@ -20,14 +20,7 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_users_fragment_to_user_info_fragment"
-            app:destination="@id/fragment_user_info">
-
-            <argument
-                android:name="user"
-                app:argType="com.example.skiftech.domain.models.User"
-                app:nullable="false"/>
-
-        </action>
+            app:destination="@id/fragment_user_info" />
         <action
             android:id="@+id/action_users_fragment_to_history_fragment"
             app:destination="@id/fragment_history" />
@@ -36,7 +29,13 @@
     <fragment
         android:id="@+id/fragment_user_info"
         android:name="com.example.skiftech.presentation.userinfo.UserInfoFragment"
-        tools:layout="@layout/fragment_splash" />
+        tools:layout="@layout/fragment_splash">
+        <argument
+            android:name="user"
+            app:argType="com.example.skiftech.domain.models.User"
+            app:nullable="false" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/fragment_history"
